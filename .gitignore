@@ -3,3 +3,4 @@ vpc/.terraform
 *.backup
 *.swp
 *.tfstate
+single/.terraform
