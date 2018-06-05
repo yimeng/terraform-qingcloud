@@ -55,7 +55,7 @@ resource "qingcloud_keypair" "arthur"{
 resource "qingcloud_vpc" "vpc"{
   name = "vpc-network"
   type = 1
-  vpc_network = "172.16.0.0/16"
+  vpc_network = "172.31.0.0/16"
   security_group_id = "${qingcloud_security_group.basic.id}"
   description = "测试的网络"
   eip_id = "${qingcloud_eip.vpc.id}"
@@ -82,7 +82,7 @@ resource "qingcloud_vxnet" "vx"{
   type = 1
   description = "应用的网络"
   vpc_id = "${qingcloud_vpc.vpc.id}"
-  ip_network = "172.16.1.0/24"
+  ip_network = "172.31.1.0/24"
 }
 
 resource "qingcloud_instance" "master"{
