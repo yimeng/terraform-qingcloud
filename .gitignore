@@ -1,2 +1,5 @@
 var.tf
 vpc/.terraform
+*.backup
+*.swp
+*.tfstate

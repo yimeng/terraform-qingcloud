@@ -55,7 +55,7 @@ resource "qingcloud_keypair" "arthur"{
 resource "qingcloud_vpc" "vpc"{
   name = "vpc-network"
   type = 1
-  vpc_network = "172.31.0.0/16"
+  vpc_network = "172.21.0.0/16"
   security_group_id = "${qingcloud_security_group.basic.id}"
   description = "测试的网络"
   eip_id = "${qingcloud_eip.vpc.id}"
@@ -82,7 +82,7 @@ resource "qingcloud_vxnet" "vx"{
   type = 1
   description = "应用的网络"
   vpc_id = "${qingcloud_vpc.vpc.id}"
-  ip_network = "172.31.1.0/24"
+  ip_network = "172.21.1.0/24"
 }
 
 resource "qingcloud_instance" "master"{
@@ -91,9 +91,6 @@ resource "qingcloud_instance" "master"{
   managed_vxnet_id = "${qingcloud_vxnet.vx.id}"
   keypair_ids = ["${qingcloud_keypair.arthur.id}"]
   security_group_id ="${qingcloud_security_group.basic.id}"
-  provisioner "local-exec" {
-    command = "echo ${qingcloud_eip.vpc.addr} > ip_address.txt"
-  }
 }
 
 resource "qingcloud_instance" "slave"{
@@ -107,8 +104,7 @@ resource "qingcloud_instance" "slave"{
   security_group_id ="${qingcloud_security_group.basic.id}"
 }
 
-output "ip" {
-  value = "${qingcloud_eip.vpc.addr}"
+output "ssh-vpc" {
+  value = "sshuttle  -r root@${qingcloud_eip.vpc.addr}:443 172.21.1.0/24"
 }
-
 
