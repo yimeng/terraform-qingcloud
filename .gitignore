@@ -1,6 +1,9 @@
 var.tf
-vpc/.terraform
 *.backup
 *.swp
 *.tfstate
+terraform.tfstate.*
+.terraform
+
 single/.terraform
+vpc/.terraform

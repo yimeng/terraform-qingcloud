@@ -1,0 +1,28 @@
+terraform {
+  backend "remote" {
+    organization = ""
+
+    workspaces {
+      name = ""
+    }
+  }
+}
+
+variable "access_key" {
+  default = ""
+}
+
+variable "secret_key" {
+  default = ""
+}
+
+variable "zone" {
+  default = "pek3b"
+}
+
+provider "qingcloud" {
+  access_key = var.access_key
+  secret_key = var.secret_key
+  zone       = var.zone
+}
+
